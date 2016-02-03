@@ -22,6 +22,10 @@ from itertools import islice, takewhile
 import pytest
 
 
+target = 4e6
+answer = 4613732
+
+
 def fibonacci():
     """Yield Fibonacci numbers, starting with 1 and 2."""
     a, b = 1, 2
@@ -47,11 +51,11 @@ def sum_of_even_fibonacci_numbers_lte(n):
     (2, 2),
     (8, 2 + 8),
     (89, 2 + 8 + 34),
-    (4e6, 4613732),
+    (target, answer),
     ])
 def test_sum_of_even_fibonacci_numbers_lte(n, expected):
     assert sum_of_even_fibonacci_numbers_lte(n) == expected
 
 
 if __name__ == '__main__':
-    print(sum_of_even_fibonacci_numbers_lte(4e6))
+    print(sum_of_even_fibonacci_numbers_lte(target))

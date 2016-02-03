@@ -16,6 +16,10 @@ from collections import defaultdict
 from itertools import count, islice, takewhile
 
 
+target = 2e6
+answer = 142913828922
+
+
 def primes():
     """Yield prime numbers, starting with 2.
 
@@ -49,8 +53,8 @@ def sum_of_primes_below(n):
 
 
 def test_sum_of_primes_below():
-    assert sum_of_primes_below(2e6) == 142913828922
+    assert sum_of_primes_below(target) == answer
 
 
 if __name__ == '__main__':
-    print(sum_of_primes_below(2e6))
+    print(sum_of_primes_below(target))

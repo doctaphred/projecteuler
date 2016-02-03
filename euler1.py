@@ -16,6 +16,10 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 import pytest
 
 
+target = 1000
+answer = 233168
+
+
 def sum_of_multiples_of_three_or_five_less_than(n):
     """Return the sum of all multiples of 3 or 5 below n."""
     return sum(x for x in range(n) if not x % 3 or not x % 5)
@@ -33,11 +37,11 @@ def sum_of_multiples_of_three_or_five_less_than(n):
     (8, 14),
     (9, 14),
     (10, 23),
-    (1000, 233168),
+    (target, answer),
     ])
 def test_sum_of_multiples_of_three_or_five_less_than(test_input, expected):
     assert sum_of_multiples_of_three_or_five_less_than(test_input) == expected
 
 
 if __name__ == '__main__':
-    print(sum_of_multiples_of_three_or_five_less_than(1000))
+    print(sum_of_multiples_of_three_or_five_less_than(target))
