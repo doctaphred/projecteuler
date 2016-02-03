@@ -26,7 +26,7 @@ def primes():
     http://code.activestate.com/recipes/117119/#c2
     """
     yield 2
-    # Map composites to primes witnessing their compositeness.
+    # Map composites to primes witnessing their compositeness
     composites = {}
     # Skip even numbers
     for n in count(3, step=2):
