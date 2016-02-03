@@ -12,7 +12,6 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 
 Find the sum of all the primes below two million.
 """
-from collections import defaultdict
 from itertools import count, islice, takewhile
 
 
@@ -23,24 +22,25 @@ answer = 142913828922
 def primes():
     """Yield prime numbers, starting with 2.
 
-    Algorithm by David Eppstein:
-    http://code.activestate.com/recipes/117119/
+    Algorithm by David Eppstein and Alex Martelli:
+    http://code.activestate.com/recipes/117119/#c2
     """
     # Map composites to primes witnessing their compositeness.
-    composites = defaultdict(list)
+    composites = {}
     for n in count(2):
-        if n not in composites:
+        prime_divisor = composites.pop(n, None)
+        if prime_divisor is None:
             # n is prime
             yield n
             # Record n as a divisor of its square
-            composites[n ** 2].append(n)
+            composites[n ** 2] = n
         else:
             # n is composite
-            # Move each witness to its next multiple
-            for prime_divisor in composites[n]:
-                composites[prime_divisor + n].append(prime_divisor)
-            # We won't see n again; free this memory
-            del composites[n]
+            # Move the witness to a new multiple
+            x = n + prime_divisor
+            while x in composites:
+                x += prime_divisor
+            composites[x] = prime_divisor
 
 
 def test_primes():
