@@ -17,7 +17,7 @@ be:
 By considering the terms in the Fibonacci sequence whose values do not
 exceed four million, find the sum of the even-valued terms.
 """
-from itertools import islice
+from itertools import islice, takewhile
 
 import pytest
 
@@ -34,17 +34,10 @@ def test_fibonacci():
     assert list(islice(fibonacci(), 10)) == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
 
-def even_elements_lte(n, seq):
-    for element in seq:
-        if element > n:
-            return
-        if not element & 1:
-            yield element
-
-
 def sum_of_even_fibonacci_numbers_lte(n):
     """Return the sum of all even-valued Fibonacci numbers <= n."""
-    return sum(even_elements_lte(n, fibonacci()))
+    fibs_lte_n = takewhile(n.__ge__, fibonacci())
+    return sum(x for x in fibs_lte_n if not x & 1)
 
 
 @pytest.mark.parametrize('n, expected', [
