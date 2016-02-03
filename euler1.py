@@ -33,6 +33,7 @@ def sum_of_multiples_of_three_or_five_less_than(n):
     (8, 14),
     (9, 14),
     (10, 23),
+    (1000, 233168),
     ])
 def test_sum_of_multiples_of_three_or_five_less_than(test_input, expected):
     assert sum_of_multiples_of_three_or_five_less_than(test_input) == expected
