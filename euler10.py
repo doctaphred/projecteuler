@@ -22,18 +22,20 @@ answer = 142913828922
 def primes():
     """Yield prime numbers, starting with 2.
 
-    Algorithm by David Eppstein and Alex Martelli:
+    Algorithm by David Eppstein, Alex Martelli, and Tim Hochberg:
     http://code.activestate.com/recipes/117119/#c2
     """
+    yield 2
     # Map composites to primes witnessing their compositeness.
     composites = {}
-    for n in count(2):
+    # Skip even numbers
+    for n in count(3, step=2):
         prime_divisor = composites.pop(n, None)
         if prime_divisor is None:
             # n is prime
             yield n
             # Record n as a divisor of its square
-            composites[n ** 2] = n
+            composites[n ** 2] = 2 * n
         else:
             # n is composite
             # Move the witness to a new multiple
