@@ -30,6 +30,7 @@ def primes():
     composites = {}
     # Skip even numbers
     for n in count(3, step=2):
+        # We won't see n again, so we can delete its witness, if any
         prime_divisor = composites.pop(n, None)
         if prime_divisor is None:
             # n is prime
