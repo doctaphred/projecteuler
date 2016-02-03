@@ -54,6 +54,7 @@ def sum_of_even_fibonacci_numbers_lte(n):
     (2, 2),
     (8, 2 + 8),
     (89, 2 + 8 + 34),
+    (4e6, 4613732),
     ])
 def test_sum_of_even_fibonacci_numbers_lte(n, expected):
     assert sum_of_even_fibonacci_numbers_lte(n) == expected
