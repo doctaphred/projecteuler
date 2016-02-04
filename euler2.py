@@ -38,10 +38,22 @@ def test_fibonacci():
     assert list(islice(fibonacci(), 10)) == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
 
+def even_fibonacci():
+    """Yield even Fibonacci numbers, starting with 2."""
+    a, b = 2, 3
+    while True:
+        yield a
+        # Every third Fibonacci number is even, so just skip two terms
+        a, b = a + 2 * b, 2 * a + 3 * b
+
+
+def test_even_fibonacci():
+    assert list(islice(even_fibonacci(), 6)) == [2, 8, 34, 144, 610, 2584]
+
+
 def sum_of_even_fibonacci_numbers_lte(n):
     """Return the sum of all even-valued Fibonacci numbers <= n."""
-    fibs_lte_n = takewhile(n.__ge__, fibonacci())
-    return sum(x for x in fibs_lte_n if not x & 1)
+    return sum(takewhile(n.__ge__, even_fibonacci()))
 
 
 @pytest.mark.parametrize('n, expected', [
