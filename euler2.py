@@ -26,18 +26,6 @@ target = 4e6
 answer = 4613732
 
 
-def fibonacci():
-    """Yield Fibonacci numbers, starting with 1 and 2."""
-    a, b = 1, 2
-    while True:
-        yield a
-        a, b = b, a + b
-
-
-def test_fibonacci():
-    assert list(islice(fibonacci(), 10)) == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-
-
 def even_fibonacci():
     """Yield even Fibonacci numbers, starting with 2."""
     a, b = 2, 3
