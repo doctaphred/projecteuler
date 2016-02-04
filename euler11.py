@@ -39,6 +39,8 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
 """
 import numpy as np
 
+import pytest
+
 
 answer = 70600674
 
@@ -68,48 +70,86 @@ grid_str = """\
 grid = np.fromstring(grid_str, dtype=int, sep=' ').reshape(20, 20)
 
 
-slice_indices = [(0, 16), (1, 17), (2, 18), (3, 19)]
+def product(arrays):
+    """Calculate the element-wise product of the arrays.
+
+    Args:
+        an iterable of arrays, all having the same shape. Must not be
+        empty.
+    Returns:
+        the element-wise product of the arrays.
+    """
+    arrays = iter(arrays)
+    result = np.copy(next(arrays))
+    for array in arrays:
+        result *= array
+    return result
 
 
-def row_offsets():
-    for start, stop in slice_indices:
-        yield grid[start:stop, :]
+@pytest.mark.parametrize('arrays, expected', [
+    ([[1], [0]], [0]),
+    ([[1, 2, 3], [4, 5, 6]], [4, 10, 18]),
+    ([range(-10, 10), range(-10, 10)], [i ** 2 for i in range(-10, 10)]),
+    ])
+def test_product(arrays, expected):
+    assert np.array_equal(product(arrays), expected)
 
 
-def col_offsets():
-    for start, stop in slice_indices:
-        yield grid[:, start:stop]
+def grid_slices(rows, cols):
+    """Yield sections of grid, sliced according to the given values.
+
+    The yielded slices are backed by the original grid, and thus require
+    very little additional memory.
+
+    Args:
+        rows: iterable of (start, stop) indices.
+        cols: iterable of (start, stop) indices.
+    Yields:
+        slices of grid, according to the indices in rows and cols.
+    """
+    for (row_start, row_stop), (col_start, col_stop) in zip(rows, cols):
+        yield grid[row_start:row_stop, col_start:col_stop]
 
 
-def diag_offsets1():
-    for start, stop in slice_indices:
-        yield grid[start:stop, start:stop]
+def max_neighbor_product():
+    """Calculate the greatest product of 4 adjacent neighbors.
+
+    Considers 4 directions: vertical, horizontal, and both diagonals.
+    """
+    # The most efficient way to calculate each product of four elements
+    # of an array in a single direction is:
+    #   1) offset the array by a single index three times in the given
+    #      direction;
+    #   2) trim the four resulting arrays to the same shape; and
+    #   3) calculate their element-wise product.
+
+    # This method is memory efficient, since numpy array slices are
+    # backed by the original array, and also CPU-efficient, since numpy
+    # efficiently broadcasts element-wise multiplication.
+
+    # The offsets and trimming can be accomplished by taking the
+    # following slices of the original array along one or both axes:
+    offset_slices = [(0, 16), (1, 17), (2, 18), (3, 19)]
+    # L[None:None] == L[:], so these slices return the entire axis:
+    whole_axis = [(None, None)] * 4
+
+    neighbor_slices = [
+        # Offset rows, but not columns: "top to bottom"
+        grid_slices(rows=offset_slices, cols=whole_axis),
+        # Offset columns, but not rows: "left to right"
+        grid_slices(rows=whole_axis, cols=offset_slices),
+        # Offset both rows and columns: "upper left to lower right"
+        grid_slices(rows=offset_slices, cols=offset_slices),
+        # Offset both rows and columns: "lower left to upper right"
+        grid_slices(rows=offset_slices, cols=reversed(offset_slices)),
+        ]
+
+    return max(product(neighbors).max() for neighbors in neighbor_slices)
 
 
-def diag_offsets2():
-    rev_indices = reversed(slice_indices)
-    for (start1, stop1), (start2, stop2) in zip(slice_indices, rev_indices):
-        yield grid[start1:stop1, start2:stop2]
-
-
-def multiply_by(shape, offsets):
-    products = np.ones(shape)
-    for offset in offsets:
-        products *= offset
-    return products.max()
-
-
-def max_product():
-    row_products = multiply_by((16, 20), row_offsets())
-    col_products = multiply_by((20, 16), col_offsets())
-    diag_products1 = multiply_by((16, 16), diag_offsets1())
-    diag_products2 = multiply_by((16, 16), diag_offsets2())
-    return max(row_products, col_products, diag_products1, diag_products2)
-
-
-def test_max_product():
-    assert max_product() == answer
+def test_max_neighbor_product():
+    assert max_neighbor_product() == answer
 
 
 if __name__ == '__main__':
-    print(max_product())
+    print(max_neighbor_product())
