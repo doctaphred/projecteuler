@@ -40,6 +40,9 @@ direction (up, down, left, right, or diagonally) in the 20×20 grid?
 import numpy as np
 
 
+answer = 70600674
+
+
 grid_str = """\
 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -102,6 +105,10 @@ def max_product():
     diag_products1 = multiply_by((16, 16), diag_offsets1())
     diag_products2 = multiply_by((16, 16), diag_offsets2())
     return max(row_products, col_products, diag_products1, diag_products2)
+
+
+def test_max_product():
+    assert max_product() == answer
 
 
 if __name__ == '__main__':
