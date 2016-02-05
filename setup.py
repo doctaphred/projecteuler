@@ -3,6 +3,10 @@
 from setuptools import find_packages, setup
 
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
+
 setup(
     name='projecteuler',
     version='1.0',
@@ -15,4 +19,5 @@ setup(
             'euler = projecteuler.__main__:main',
             ],
         },
+    install_requires=requirements,
     )
