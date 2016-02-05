@@ -23,6 +23,7 @@ def main():
         print('{}/{}: Solving problem {}...'
               .format(i, num_problems, problem.number))
         problem.solve()
+        print('Answer:', problem.answer)
         print(problem)
 
     print()
