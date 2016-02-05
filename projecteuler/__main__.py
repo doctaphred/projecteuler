@@ -1,8 +1,7 @@
-#!/usr/bin/env python3 -u
 # -*- coding: utf-8 -*-
 import sys
 
-from projecteuler.problem import Problem
+from .problem import Problem
 
 
 def main():

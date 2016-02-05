@@ -11,6 +11,8 @@ setup(
     description='Solutions to selected Project Euler problems',
     packages=['projecteuler'],
     entry_points={
-        'console_scripts': ['euler = projecteuler.run:main'],
+        'console_scripts': [
+            'euler = projecteuler.__main__:main',
+            ],
         },
     )
