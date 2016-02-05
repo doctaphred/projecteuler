@@ -6,7 +6,7 @@ No peeking unless you've already solved them.
 
 You have been warned!
 
-## setup
+## Setup
 
 Requires Python 3.5.
 
