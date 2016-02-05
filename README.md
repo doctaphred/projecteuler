@@ -18,3 +18,5 @@ source venv/bin/activate  # Or appropriate script for your shell
 ./setup.py install  # Or `pip install .`
 euler
 ```
+
+![Usage example](usage-example.png)
