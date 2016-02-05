@@ -1,6 +1,6 @@
 #!/usr/bin/env python3 -u
 # -*- coding: utf-8 -*-
-from setuptools import setup
+from setuptools import find_packages, setup
 
 
 setup(
@@ -9,7 +9,7 @@ setup(
     author='Frederick Wagner',
     url='https://github.com/doctaphred/projecteuler',
     description='Solutions to selected Project Euler problems',
-    packages=['projecteuler'],
+    packages=find_packages(exclude=['tests']),
     entry_points={
         'console_scripts': [
             'euler = projecteuler.__main__:main',
