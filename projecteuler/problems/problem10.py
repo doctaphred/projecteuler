@@ -15,6 +15,7 @@ Find the sum of all the primes below two million.
 from itertools import count, islice, takewhile
 
 
+number = 10
 target = 2e6
 answer = 142913828922
 
@@ -59,5 +60,9 @@ def test_sum_of_primes_below():
     assert sum_of_primes_below(target) == answer
 
 
+def solution():
+    return sum_of_primes_below(target)
+
+
 if __name__ == '__main__':
-    print(sum_of_primes_below(target))
+    print(solution())

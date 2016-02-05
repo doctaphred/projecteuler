@@ -42,6 +42,7 @@ import numpy as np
 import pytest
 
 
+number = 11
 answer = 70600674
 
 
@@ -144,12 +145,14 @@ def max_neighbor_product():
         grid_slices(rows=offset_slices, cols=reversed(offset_slices)),
         ]
 
-    return max(product(neighbors).max() for neighbors in neighbor_slices)
+    return int(max(product(neighbors).max() for neighbors in neighbor_slices))
 
 
 def test_max_neighbor_product():
     assert max_neighbor_product() == answer
 
 
+solution = max_neighbor_product
+
 if __name__ == '__main__':
-    print(max_neighbor_product())
+    print(solution())

@@ -22,6 +22,7 @@ from itertools import islice, takewhile
 import pytest
 
 
+number = 2
 target = 4e6
 answer = 4613732
 
@@ -57,5 +58,9 @@ def test_sum_of_even_fibonacci_numbers_lte(n, expected):
     assert sum_of_even_fibonacci_numbers_lte(n) == expected
 
 
+def solution():
+    return sum_of_even_fibonacci_numbers_lte(target)
+
+
 if __name__ == '__main__':
-    print(sum_of_even_fibonacci_numbers_lte(target))
+    print(solution())
