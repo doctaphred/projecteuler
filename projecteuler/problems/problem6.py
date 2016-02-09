@@ -1,4 +1,5 @@
 number = 6
+target = 100
 answer = 25164150
 
 
@@ -14,5 +15,9 @@ def square_of_sum(n):
 assert square_of_sum(10) == 3025
 
 
+def square_diff(n):
+    return square_of_sum(n) - sum_of_squares(n)
+
+
 def solution():
-    return square_of_sum(100) - sum_of_squares(100)
+    return square_diff(100)
