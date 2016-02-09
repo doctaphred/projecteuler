@@ -1,6 +1,6 @@
-from collections import Counter
 from functools import reduce
 from operator import mul
+from math import gcd
 
 import pytest
 
@@ -15,18 +15,17 @@ def product(numbers):
     return reduce(mul, numbers, 1)
 
 
-def largest_factor_product(numbers):
-    largest_factor_counts = Counter()
-    for n in numbers:
-        for factor, factor_count in Counter(factorize(n)).items():
-            if factor_count > largest_factor_counts[factor]:
-                largest_factor_counts[factor] = factor_count
-    return product(largest_factor_counts.elements())
+def _lcm(a, b):
+    return abs(a * b) // gcd(a, b)
 
 
-def test_largest_factor_product():
+def lcm(numbers):
+    return reduce(_lcm, numbers, 1)
+
+
+def test_lcm():
     numbers = range(1, 21)
-    n = largest_factor_product(numbers)
+    n = lcm(numbers)
     assert not any(n % i for i in numbers)
 
 
@@ -63,5 +62,4 @@ def test_factorize(n, factors):
 
 
 def solution():
-    # return next(n for n in count(1) if evenly_divisible(n))
-    return largest_factor_product(range(1, 21))
+    return lcm(range(1, 21))
