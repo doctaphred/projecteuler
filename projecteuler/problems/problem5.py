@@ -29,18 +29,21 @@ def test_lcm():
     assert not any(n % i for i in numbers)
 
 
+def first_factor(n):
+    sqrt_n = n ** 0.5
+    for p in primes():
+        if p > sqrt_n:
+            # n must be prime
+            return n
+        if not n % p:
+            return p
+
+
 def factorize(n):
     while n > 1:
-        sqrt_n = n ** 0.5
-        for p in primes():
-            if p > sqrt_n:
-                # n must be prime
-                yield n
-                return
-            if not n % p:
-                yield p
-                n //= p
-                break
+        f = first_factor(n)
+        yield f
+        n //= f
 
 
 @pytest.mark.parametrize('n, factors', [
