@@ -13,6 +13,7 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 """
 from itertools import count, islice, takewhile
+from functools import wraps
 
 
 number = 10
@@ -20,6 +21,22 @@ target = 2e6
 answer = 142913828922
 
 
+def reuse(gen_func):
+    """Reuse a generator!"""
+    history = []
+    gen = gen_func()
+
+    @wraps(gen_func)
+    def reusable():
+        yield from history
+        for x in gen:
+            history.append(x)
+            yield x
+
+    return reusable
+
+
+@reuse
 def primes():
     """Yield prime numbers, starting with 2.
 
