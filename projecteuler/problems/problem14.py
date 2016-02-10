@@ -35,7 +35,7 @@ target = 1000000
 answer = 837799
 
 
-@lru_cache(target)
+@lru_cache(target * 2)
 def collatz(n):
     if n == 1:
         return [n]
@@ -44,12 +44,11 @@ def collatz(n):
     else:
         return [n] + collatz(n // 2)
 
-
 assert collatz(1) == [1]
 assert collatz(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
 
 
-@lru_cache(target)
+@lru_cache(target * 2)
 def collatz_len(n):
     if n == 1:
         return 1
@@ -57,7 +56,6 @@ def collatz_len(n):
         return 1 + collatz_len(3 * n + 1)
     else:
         return 1 + collatz_len(n // 2)
-
 
 assert collatz_len(1) == 1
 assert collatz_len(13) == 10
