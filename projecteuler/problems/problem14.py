@@ -49,8 +49,19 @@ assert collatz(1) == [1]
 assert collatz(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
 
 
-def solution():
-    def collatz_len(n):
-        return sum(1 for _ in collatz(n))
+@lru_cache(target)
+def collatz_len(n):
+    if n == 1:
+        return 1
+    elif n % 2:
+        return 1 + collatz_len(3 * n + 1)
+    else:
+        return 1 + collatz_len(n // 2)
 
+
+assert collatz_len(1) == 1
+assert collatz_len(13) == 10
+
+
+def solution():
     return max(range(1, target), key=collatz_len)
