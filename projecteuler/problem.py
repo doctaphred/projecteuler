@@ -66,12 +66,14 @@ class Problem:
     def discover(cls):
         """Yield instances created from submodules in this package.
 
-        All submodules must define attributes number, answer, and
-        solution, which will become the corresponding attributes of the
-        created Problem instance.
+        All submodules must define 'number' and 'solution' attributes,
+        which will become the corresponding attributes of the created
+        Problem instance. Submodules may also define an 'answer'
+        attribute to enable solution verification.
         """
         for module in sorted(submodules(problems), key=attrgetter('number')):
-            yield cls(module.number, module.answer, module.solution)
+            yield cls(module.number, getattr(module, 'answer', None),
+                      module.solution)
 
     @property
     def correct(self):
