@@ -20,4 +20,4 @@ def square_diff(n):
 
 
 def solution():
-    return square_diff(100)
+    return square_diff(target)
