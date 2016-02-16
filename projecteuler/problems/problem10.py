@@ -1,4 +1,3 @@
-#!/usr/bin/env python3 -u
 # -*- coding: utf-8 -*-
 """
 Project Euler: Problem 10

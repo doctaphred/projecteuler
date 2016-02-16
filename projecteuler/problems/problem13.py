@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Project Euler: Problem 13
+=========================
+
+https://projecteuler.net/problem=13
+
+Highly divisible triangular number
+----------------------------------
+Work out the first ten digits of the sum of the following one-hundred
+50-digit numbers.
+"""
 number = 13
 target = 10
 answer = 5537376230
