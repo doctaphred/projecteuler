@@ -27,12 +27,14 @@ answer = 25164150
 
 
 def sum_of_squares(n):
+    """Return the sum of the first n square numbers."""
     return sum(n ** 2 for n in range(1, n + 1))
 
 assert sum_of_squares(10) == 385
 
 
 def square_of_sum(n):
+    """Return the square of the sum of the numbers from 1 to n."""
     return sum(range(1, n + 1)) ** 2
 
 assert square_of_sum(10) == 3025

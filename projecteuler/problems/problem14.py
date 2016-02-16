@@ -50,6 +50,11 @@ assert collatz(13) == [13, 40, 20, 10, 5, 16, 8, 4, 2, 1]
 
 @lru_cache(target * 2)
 def collatz_len(n):
+    """Calculate the length of the Collatz sequence starting from n.
+
+    Solution is recursive, but intermediate results are cached: call on
+    smaller values of n first if stack space is an issue.
+    """
     if n == 1:
         return 1
     elif n % 2:

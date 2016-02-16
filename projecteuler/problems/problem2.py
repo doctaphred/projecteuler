@@ -59,7 +59,3 @@ def test_sum_of_even_fibonacci_numbers_lte(n, expected):
 
 def solution():
     return sum_of_even_fibonacci_numbers_lte(target)
-
-
-if __name__ == '__main__':
-    print(solution())

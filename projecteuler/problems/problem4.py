@@ -19,6 +19,7 @@ import pytest
 
 
 def palindromic(n):
+    """Check if the number reads the same both ways."""
     n = str(n)
     # reversed(n) returns a reversed iterator; use slicing instead
     return n == n[::-1]
@@ -49,6 +50,7 @@ answer = 906609
 
 
 def three_digit_products():
+    """Generate all products of two three digit numbers."""
     for i, j in combinations_with_replacement(range(100, 1000), 2):
         yield i * j
 

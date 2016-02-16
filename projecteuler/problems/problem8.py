@@ -69,6 +69,11 @@ n_str = ''.join("""
 
 
 def adjacent_digits(num_digits):
+    """Yield num_digits-length windows of n_str, in order from the start.
+
+    The queue yielded by this generator is reused between calls: make
+    use of its result immediately, and do not modify it!
+    """
     q = deque(n_str[:num_digits], maxlen=num_digits)
     yield q
     for n in n_str[num_digits:]:
@@ -77,10 +82,12 @@ def adjacent_digits(num_digits):
 
 
 def product(digits):
+    """Find the product of the sequence of integer strings."""
     return reduce(mul, map(int, digits), 1)
 
 
 def max_adjacent_product(num_digits):
+    """Find the maximum product of all num_digits-length windows of numbers."""
     return max(product(digits) for digits in adjacent_digits(num_digits))
 
 assert max_adjacent_product(4) == 5832

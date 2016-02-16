@@ -23,6 +23,7 @@ answer = 104743
 
 
 def nth_prime(n):
+    """Find the nth prime number."""
     return next(islice(primes(), n - 1, None))
 
 assert nth_prime(1) == 2

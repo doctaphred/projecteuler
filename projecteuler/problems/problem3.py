@@ -20,6 +20,7 @@ answer = 6857
 
 
 def prime_factors(n):
+    """Yield primes which evenly divide n."""
     sqrt_n = n ** 0.5
     for p in primes():
         if p > sqrt_n:
@@ -30,7 +31,3 @@ def prime_factors(n):
 
 def solution():
     return max(prime_factors(target))
-
-
-if __name__ == '__main__':
-    print(solution())

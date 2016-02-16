@@ -41,6 +41,11 @@ answer = 76576500
 
 
 def triangle_numbers():
+    """Generate the triangle numbers (sums of the natural numbers).
+
+    >>> list(islice(triangle_numbers(), 10)
+    [1, 3, 6, 10, 15, 21, 28, 36, 45, 55]
+    """
     current = 0
     for i in count(1):
         current += i
@@ -51,6 +56,7 @@ assert (list(islice(triangle_numbers(), 10)) ==
 
 
 def num_divisors(n):
+    """Find the number of unique divisors of n."""
     c = Counter(factorize(n))
     total = 1
     for n in c.values():

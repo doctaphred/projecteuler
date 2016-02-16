@@ -152,6 +152,3 @@ def test_max_neighbor_product():
 
 
 solution = max_neighbor_product
-
-if __name__ == '__main__':
-    print(solution())

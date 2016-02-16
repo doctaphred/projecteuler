@@ -24,6 +24,7 @@ answer = 31875000
 
 
 def whatever(n):
+    """Yield the products of Pythagorean triplets whose sum is n."""
     for a, b in combinations(range(1, n), 2):
         c = n - a - b
         if a ** 2 + b ** 2 == c ** 2:

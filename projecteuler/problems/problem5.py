@@ -27,6 +27,7 @@ answer = 232792560
 
 
 def product(numbers):
+    """Find the product of the sequence of numbers."""
     return reduce(mul, numbers, 1)
 
 
@@ -35,6 +36,7 @@ def _lcm(a, b):
 
 
 def lcm(numbers):
+    """Find the least common multiple of the sequence of numbers."""
     return reduce(_lcm, numbers, 1)
 
 
@@ -45,6 +47,7 @@ def test_lcm():
 
 
 def first_factor(n):
+    """Find the smallest positive integer that evenly divides n."""
     sqrt_n = n ** 0.5
     for p in primes():
         if p > sqrt_n:
@@ -55,6 +58,12 @@ def first_factor(n):
 
 
 def factorize(n):
+    """Generate prime factors of n in increasing order.
+
+    Includes duplicate factors.
+
+    If n is prime, yields n.
+    """
     while n > 1:
         f = first_factor(n)
         yield f

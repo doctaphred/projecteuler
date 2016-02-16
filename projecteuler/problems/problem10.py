@@ -78,7 +78,3 @@ def test_sum_of_primes_below():
 
 def solution():
     return sum_of_primes_below(target)
-
-
-if __name__ == '__main__':
-    print(solution())
